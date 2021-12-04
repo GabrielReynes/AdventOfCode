@@ -18,7 +18,7 @@ arr = {e: i for i, e in enumerate(map(int, lines[0].split(',')))}
 round_max = 0
 max_sum = 0
 
-for i in range(2, len(lines), 6):
+for i in range(2, len(lines), SIZE+1):
     numbers = tuple(map(str_to_int, lines[i:i+SIZE]))
 
     min_lines = min((max(l, key=arr.get) for l in numbers), key=arr.get)
