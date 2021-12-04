@@ -16,7 +16,6 @@ lines = open('input.txt', 'r').readlines()
 arr = {e: i for i, e in enumerate(map(int, lines[0].split(',')))}
 
 round_max = 0
-max_sum = 0
 
 for i in range(2, len(lines), SIZE+1):
     numbers = tuple(map(str_to_int, lines[i:i+SIZE]))
