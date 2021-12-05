@@ -4,23 +4,19 @@ Created on Sun Dec  5 12:21:08 2021
 
 @author: Gabri
 """
+from collections import Counter
 
 lines = open('input.txt', 'r').readlines()
 
-tab = [[0] * 1000 for _ in range(1000)]
-count = 0
+c = Counter()
 
 for l in lines:
     (sX, sY), (eX, eY) = map(lambda s: map(int, s.split(',')), l.split('->'))
 
     dX, dY = eX - sX, eY - sY
     xP, yP = max(-1, min(1, dX)), max(-1, min(1, dY))
-    dist = (abs(dX) + abs(dY)) // (abs(xP) + abs(yP))
 
-    for i in range(dist + 1):
-        x, y = sX + xP * i, sY + yP * i
-        tab[x][y] += 1
-        if tab[x][y] == 2:
-            count += 1
+    for i in range(max(abs(dX), abs(dY)) + 1):
+        c[(sX + xP * i, sY + yP * i)] += 1
 
-print(count)
+print(sum(1 for key in c if c[key] > 1))

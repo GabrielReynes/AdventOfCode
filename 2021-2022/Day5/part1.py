@@ -4,11 +4,12 @@ Created on Sun Dec  5 11:04:22 2021
 
 @author: Gabri
 """
+from collections import Counter
+
 
 lines = open('input.txt', 'r').readlines()
 
-tab = [[0] * 1000 for _ in range(1000)]
-count = 0
+c = Counter()
 
 for l in lines:
     (x1, y1), (x2, y2) = map(lambda s: map(int, s.split(',')), l.split('->'))
@@ -21,9 +22,6 @@ for l in lines:
     sX, sY = min(x1, x2), min(y1, y2)
 
     for i in range(dX + dY + 1):
-        x, y = sX + xP * i, sY + yP * i
-        tab[x][y] += 1
-        if tab[x][y] == 2:
-            count += 1
+        c[(sX + xP * i, sY + yP * i)] += 1
 
-print(count)
+print(sum(1 for key in c if c[key] > 1))
