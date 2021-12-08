@@ -16,8 +16,7 @@ for i in range(2, len(lines), SIZE+1):
     numbers = tuple(map(lambda s: tuple(map(int, s.split())), lines[i:i+SIZE]))
 
     min_lines = min((max(l, key=arr.get) for l in numbers), key=arr.get)
-    min_colums = min((max((l[c] for l in numbers), key=arr.get)
-                     for c in range(SIZE)), key=arr.get)
+    min_colums = min((max(l, key=arr.get) for l in zip(*numbers)), key=arr.get)
 
     win_val = min(min_lines, min_colums, key=arr.get)
     win_round = arr[win_val]
