@@ -38,7 +38,6 @@ for y in range(1, len(MAP)-1):
                 SEEN.update(not_seen)
 
             B.append(size)
-            B = sorted(B, reverse=True)[:3]
 
-
+B.sort(reverse=True)
 print(B[0]*B[1]*B[2])
