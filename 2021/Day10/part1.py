@@ -6,7 +6,7 @@ Created on Fri Dec 10 09:44:17 2021
 """
 S = 0
 
-P = {')':('(', 3), ']':('[', 57), '}':('{', 1197), '>':('<', 25137)}
+P = {')': ('(', 3), ']': ('[', 57), '}': ('{', 1197), '>': ('<', 25137)}
 
 for l in open('input.txt', 'r').readlines():
     pile = []
@@ -18,5 +18,3 @@ for l in open('input.txt', 'r').readlines():
                 S += P[c][1]
                 break
 print(S)
-        
-    

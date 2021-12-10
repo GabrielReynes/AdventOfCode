@@ -15,12 +15,11 @@ for l in open('input.txt', 'r').readlines():
         if c in O:
             pile.append(c)
         elif pile.pop() != O[C.index(c)]:
-                break
+            break
     else:
         score = 0
         while pile:
             score = 5*score + O.index(pile.pop()) + 1
         SCORES.append(score)
-    
+
 print(sorted(SCORES)[len(SCORES)//2])
-        
