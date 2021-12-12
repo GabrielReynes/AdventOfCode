@@ -6,8 +6,8 @@ Created on Sat Dec 11 12:52:45 2021
 """
 
 MAP = list(map(lambda s: list(map(int, s.strip())), open("input.txt", 'r').readlines()))
-
-for step in range(1000):
+step = 0
+while True:
     flashes = []
     flashed = set()
     for y in range(10):
@@ -31,6 +31,7 @@ for step in range(1000):
                 if MAP[y+j][x+i] > 9:
                     flashes.append((x+i, y+j))
                     flashed.add((x+i, y+j))
+    step += 1
     if len(flashed) == 100:
-        print(step+1)
+        print(step)
         break
