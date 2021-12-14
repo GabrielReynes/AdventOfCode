@@ -6,12 +6,13 @@ Created on Tue Dec 14 08:18:06 2021
 """
 from collections import Counter
 
-lines = open('input.txt').readlines()
-starter = lines[0].strip()
-act = list(map(lambda i: tuple(starter[i:i+2]), range(len(starter)-1)))
+f = open('input.txt')
+starter = f.readline().strip()
+f.readline() #blank
+
 counter = Counter(starter)
-dic = {tuple(k.strip()): v.strip()
-       for k, v in map(lambda s: s.split('->'), lines[2:])}
+act = list(map(lambda i: tuple(starter[i:i+2]), range(len(starter)-1)))
+dic = {tuple(k.strip()): v.strip()for k, v in map(lambda s: s.split('->'), f)}
 
 for _ in range(10):
     new = []
@@ -22,4 +23,5 @@ for _ in range(10):
         counter[add] += 1
     act = new
 
-print(max(counter.values())-min(counter.values()))
+values = counter.values()
+print(max(values)-min(values))

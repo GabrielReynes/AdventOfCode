@@ -6,12 +6,13 @@ Created on Tue Dec 14 08:43:30 2021
 """
 from collections import Counter
 
-lines = open('input.txt').readlines()
-starter = lines[0].strip()
+f = open('input.txt')
+starter = f.readline().strip()
+f.readline() #blank
+
 final = Counter(starter)
 counter = Counter(map(lambda i: tuple(starter[i:i+2]), range(len(starter)-1)))
-dic = {tuple(k.strip()): v.strip()
-       for k, v in map(lambda s: s.split('->'), lines[2:])}
+dic = {tuple(k.strip()): v.strip() for k, v in map(lambda s: s.split('->'), f)}
 
 for _ in range(40):
     new = Counter()
