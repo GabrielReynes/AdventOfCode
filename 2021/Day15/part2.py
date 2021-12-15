@@ -4,7 +4,6 @@ Created on Wed Dec 15 10:21:14 2021
 
 @author: Gabri
 """
-
 import heapq
 
 MAP = list(map(lambda s: list(map(int, s.strip())),
@@ -28,8 +27,7 @@ while True:
             continue
 
         SEEN.add((nx, ny))
-        n_risk = (MAP[ny % height][nx % width] +
-                  nx//width + ny//height - 1) % 9 + 1
+        n_risk = (MAP[ny % height][nx % width] + nx//width + ny//height - 1) % 9 + 1
         heapq.heappush(heap, (score + n_risk, (nx, ny)))
 
 print(score)
