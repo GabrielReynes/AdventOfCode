@@ -16,12 +16,8 @@ def prod(args):
 op = [sum, prod, min, max, int.__gt__, int.__lt__, int.__eq__]
 
 
-def read(it, ln):
-    return ''.join(next(it) for _ in range(ln))
-
-
 def read_int(it, ln):
-    return int(read(it, ln), 2)
+    return int(''.join(next(it) for _ in range(ln)), 2)
 
 
 def read_lit(it):
@@ -50,7 +46,7 @@ def read_op(it, t):
         bit_length += size
         args.append(v)
 
-    return int(op[t](args) if t < 4 else op[t-1](*args)), bit_length
+    return op[t](args) if t < 4 else op[t-1](*args), bit_length
 
 
 def read_val(it):
