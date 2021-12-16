@@ -13,7 +13,7 @@ def prod(args):
     return p
 
 
-op = [sum, prod, min, max, None, int.__gt__, int.__lt__, int.__eq__]
+op = [sum, prod, min, max, int.__gt__, int.__lt__, int.__eq__]
 
 
 def read(it, ln):
@@ -46,11 +46,11 @@ def read_op(it, t):
     while n > 0:
         v, size = read_val(it)
 
-        n -= (size+6)*(not l) + l
-        bit_length += size + 6
+        n -= size*(not l) + l
+        bit_length += size
         args.append(v)
 
-    return int(op[t](args) if t < 4 else op[t](*args)), bit_length
+    return int(op[t](args) if t < 4 else op[t-1](*args)), bit_length
 
 
 def read_val(it):
@@ -62,7 +62,7 @@ def read_val(it):
     else:
         v, size = read_op(it, t)
 
-    return v, size
+    return v, size + 6
 
 
 bi = bin(int(''.join(open('input.txt', 'r')), 16))[2:]
