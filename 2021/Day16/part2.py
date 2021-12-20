@@ -62,7 +62,7 @@ def read_val(it):
 
 
 bi = bin(int(''.join(open('input.txt', 'r')), 16))[2:]
-it = iter('0'*(-len(bi) % 4) + bi)
+it = iter(bi.zfill(-len(bi) % 4))
 
 v, size = read_val(it)
 
