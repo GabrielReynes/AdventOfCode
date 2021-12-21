@@ -52,8 +52,8 @@ for v, d in values:
     for index in range(d):
         fac *= 3 - depths[index]
     while depths[d-1]:
-        depths[d-1] = False
         d -= 1
+        depths[d] = False
     depths[d-1] = True
     mag += fac * v
 
