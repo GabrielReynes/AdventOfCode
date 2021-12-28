@@ -38,8 +38,7 @@ def over_surf_m(*args):
 
 
 for l in reversed(f.readlines()):
-    match = re.match(
-        '(on|off) x=(-?\d+)..(-?\d+),y=(-?\d+)..(-?\d+),z=(-?\d+)..(-?\d+)', l)
+    match = re.match("(on|off) x=(-?\d+)..(-?\d+),y=(-?\d+)..(-?\d+),z=(-?\d+)..(-?\d+)", l)
     on = match.groups()[0] == 'on'
     t = tuple(map(int, match.groups()[1:]))
 
