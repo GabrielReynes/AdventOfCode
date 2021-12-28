@@ -13,12 +13,8 @@ save = []
 S = 0
 
 
-def overlapping(x1, x2, y1, y2):
-    return x1 <= y2 and y1 <= x2
-
-
 def surf_overlapping(t1, t2):
-    return all(overlapping(*t1[i:i+2], *t2[i:i+2]) for i in (0, 2, 4))
+    return all(t1[i] <= t2[i+1] and t2[i] <= t1[i+1] for i in (0, 2, 4))
 
 
 def size(x1, x2, y1, y2, z1, z2):
