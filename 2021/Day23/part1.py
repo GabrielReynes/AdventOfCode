@@ -4,11 +4,10 @@ Created on Thu Dec 23 10:18:53 2021
 
 @author: Gabri
 """
-import heapq
 from collections import defaultdict
 
-ROW_LENGTH = 2  # 4 for part2
-lines = open('input.txt', 'r').readlines()
+ROW_LENGTH = 4  # 4 for part2
+lines = open('input2.txt', 'r').readlines()
 
 length = len(lines[1].strip('\n#'))
 rows = ((ord(c) - ord('A') + 1 for c in line.strip('#\n ').split('#')) for line in lines[-ROW_LENGTH-1:-1])
@@ -20,7 +19,7 @@ SEEN = defaultdict(list)
 result = float('inf')
 
 while steps:
-    cost, left, positions, s_block = heapq.heappop(steps)
+    cost, left, positions, s_block = steps.pop()
     while True:
         p = 0
         while p < length:
@@ -73,7 +72,7 @@ while steps:
             n_s_block = list(s_block)
             n_s_block[s] = s_block[s][1:]
             if not any(state == (n_pos, n_s_block) for state in SEEN[n_cost]):
-                heapq.heappush(steps, (n_cost, left, n_pos, n_s_block))
+                steps.append((n_cost, left, n_pos, n_s_block))
                 SEEN[n_cost].append((n_pos, n_s_block))
 
 print(result)
