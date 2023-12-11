@@ -1,7 +1,5 @@
-from collections import Counter
-from functools import cmp_to_key
-
 from utils.aoc_utils import *
+from math import lcm
 
 DAY = 8
 input = get_input(DAY)
@@ -32,23 +30,4 @@ for a in act:
     steps.append(step)
 
 
-def pgcd(a, b):
-    while b:
-        a, b = b, a % b
-    return a
-
-
-def ppcm(a, b):
-    return a * b // pgcd(a, b)
-
-
-def ppcms(lst):
-    r = ppcm(lst[0], lst[1])
-
-    for i in range(2, len(lst)):
-        r = ppcm(r, lst[i])
-
-    return r
-
-
-submit(DAY, 2, ppcms(steps))
+submit(DAY, 2, lcm(*steps))
