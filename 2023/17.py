@@ -56,8 +56,9 @@ while heap:
     (cx, cy), (dx, dy) = c, d
 
     if cx == (W - 1) and cy == (H - 1):
-        if r > 3:
-            m_hl = hl
+        if r < 4:
+            continue
+        m_hl = hl
         break
 
     if r < 10:
