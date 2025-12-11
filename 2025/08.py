@@ -28,24 +28,28 @@ input = read_input()
 # 984,92,344
 # 425,690,689"""
 
-def part1(input:str): 
-    def dist(a: tuple[int, ...], b: tuple[int, ...]) :
+
+def part1(input: str):
+    def dist(a: tuple[int, ...], b: tuple[int, ...]):
         dx = b[0] - a[0]
         dy = b[1] - a[1]
         dz = b[2] - a[2]
-        return sqrt(dx*dx + dy*dy + dz*dz)
-    
-    
-    boxes = tuple(tuple(map(int, l.split(','))) 
-                  for l in input.splitlines())
-    
+        return sqrt(dx * dx + dy * dy + dz * dz)
+
+    boxes = tuple(tuple(map(int, l.split(","))) for l in input.splitlines())
+
     pair_count = 1000
     junctions = dict[int, int]()
     jidx = 0
     b2j = dict[int, int]()
-    pairs = nlargest(pair_count, ((-dist(a, b), ia, ib) 
-                                  for (ia, a), (ib, b) in combinations(enumerate(boxes), 2)))
-    
+    pairs = nlargest(
+        pair_count,
+        (
+            (-dist(a, b), ia, ib)
+            for (ia, a), (ib, b) in combinations(enumerate(boxes), 2)
+        ),
+    )
+
     for _, ia, ib in pairs:
         ainj, binj = ia in b2j, ib in b2j
         if ainj:
@@ -53,7 +57,7 @@ def part1(input:str):
                 jia, jib = b2j[ia], b2j[ib]
                 if jia != jib:
                     junctions[jia] += junctions.pop(jib)
-                    b2j.update({k:jia for k,v in b2j.items() if v == jib})
+                    b2j.update({k: jia for k, v in b2j.items() if v == jib})
             else:
                 ji = b2j[ib] = b2j[ia]
                 junctions[ji] += 1
@@ -64,28 +68,26 @@ def part1(input:str):
             ji = b2j[ia] = b2j[ib] = jidx
             junctions[ji] = 2
             jidx += 1
-            
+
     return prod(nlargest(3, junctions.values()))
 
-        
-def part2(input:str): 
-    
-    def dist(a: tuple[int, ...], b: tuple[int, ...]) :
+
+def part2(input: str):
+    def dist(a: tuple[int, ...], b: tuple[int, ...]):
         dx = b[0] - a[0]
         dy = b[1] - a[1]
         dz = b[2] - a[2]
-        return sqrt(dx*dx + dy*dy + dz*dz)
-    
-    
-    boxes = tuple(tuple(map(int, l.split(','))) 
-                  for l in input.splitlines())
-    
+        return sqrt(dx * dx + dy * dy + dz * dz)
+
+    boxes = tuple(tuple(map(int, l.split(","))) for l in input.splitlines())
+
     junctions = dict[int, int]()
     jidx = 0
     b2j = dict[int, int]()
-    pairs = sorted((dist(a, b), ia, ib) 
-                   for (ia, a), (ib, b) in combinations(enumerate(boxes), 2))
-        
+    pairs = sorted(
+        (dist(a, b), ia, ib) for (ia, a), (ib, b) in combinations(enumerate(boxes), 2)
+    )
+
     for _, ia, ib in pairs:
         ainj, binj = ia in b2j, ib in b2j
         if ainj:
@@ -93,7 +95,7 @@ def part2(input:str):
                 jia, jib = b2j[ia], b2j[ib]
                 if jia != jib:
                     junctions[jia] += junctions.pop(jib)
-                    b2j.update({k:jia for k,v in b2j.items() if v == jib})
+                    b2j.update({k: jia for k, v in b2j.items() if v == jib})
             else:
                 ji = b2j[ib] = b2j[ia]
                 junctions[ji] += 1
@@ -104,10 +106,10 @@ def part2(input:str):
             ji = b2j[ia] = b2j[ib] = jidx
             junctions[ji] = 2
             jidx += 1
-            
-        if len(junctions) == 1 and sum(junctions.values()) == len(boxes) :
+
+        if len(junctions) == 1 and sum(junctions.values()) == len(boxes):
             return boxes[ia][0] * boxes[ib][0]
-            
+
     return 0
 
 

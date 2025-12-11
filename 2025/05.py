@@ -17,20 +17,21 @@ input = read_input()
 # 17
 # 32"""
 
-def part1(input:str): 
+
+def part1(input: str):
     ranges, ids = map(str.splitlines, input.split("\n\n"))
-    
-    rangesi = tuple(tuple(map(int, r.split('-'))) for r in ranges)
-    
+
+    rangesi = tuple(tuple(map(int, r.split("-"))) for r in ranges)
+
     res = sum(any(s <= int(id) <= e for s, e in rangesi) for id in ids)
 
     return res
-        
 
-def part2(input:str):
+
+def part2(input: str):
     ranges, ids = map(str.splitlines, input.split("\n\n"))
 
-    ranges = sorted(tuple(map(int, r.split('-'))) for r in ranges)
+    ranges = sorted(tuple(map(int, r.split("-"))) for r in ranges)
     merged = []
 
     for rs, re in ranges:
@@ -39,7 +40,8 @@ def part2(input:str):
         else:
             merged[-1][1] = max(merged[-1][1], re)
 
-    res = sum(e-s+1 for s, e in merged)
+    res = sum(e - s + 1 for s, e in merged)
     return res
+
 
 print(part2(input), 2, YEAR, DAY)
